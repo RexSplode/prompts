@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cluster-checks
+spec:
+  template:
+    spec:
+      containers:
+      - name: checks-container
+        image: your-favorite-check-image
+        command: ["sh", "-c"]
+        args:
+        - >
+          # Insert your custom checks here
+          # For example:
+          # Check if all pods are in Running state
+          kubectl get pods | grep -v Running
+      restartPolicy: OnFailure
